@@ -1,4 +1,4 @@
 # etsv5-redis-sync
 
-这是由事件驱动，根据客户端传送的table, fields, condition字段，从查询mysql中查询相应的记录，然后同步到redis中
+本程序是由事件和定时驱动，根据客户端传送的table, fields, condition字段，生成查询语句，从mysql中查询相应的记录，然后同步到redis中
 
