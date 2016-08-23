@@ -1,0 +1,50 @@
+{
+    "sys": {
+        "name": "redis-cacher",
+        "version": "6.0.0",
+        "deploy": "40-001-001",
+        "update": "2015-03-27 01:20:03",
+		"rpc":{
+			"enable":"false",
+			"host":"127.0.0.1",
+			"port":"9000"    	
+		}   
+    },
+
+    "app": {
+    	"listen": 7001,
+    	"timeAtDay": 4,
+    	"compulsiveCheck": "false",
+    	
+    	"redis":{
+    		"enable":"true",
+			"host":"127.0.0.1",
+			"host2":"192.168.2.4",
+			"port":"6379",
+			"password": "123456"
+    	},
+    	
+    	"mysql":{
+    		"enable": "true",
+			"host": "127.0.0.1",
+			"host2": "192.168.2.4",
+			"port": 3306,
+			"databaseName": "etbasedata",
+			"instance": "",
+			"user": "root",
+			"password": "root",
+			"threads": 1,
+			
+			"ddl":[
+				{"active": "true", "table": "pub_user", "fields":"ID,UserName,Name", "condition":""},
+				{"active": "true", "table": "pub_command", "fields":"", "condition":""},
+				{"active": "true", "table": "pub_driver", "fields":"", "condition":""},
+				{"active": "true", "table": "Pub_VehicleState", "fields":"", "condition":""},
+				{"active": "true", "table": "pub_workunit", "fields":"", "condition":""},
+				{"active": "true", "table": "pub_alarmkind", "fields":"", "condition":"source in(1,10)"},
+				{"active": "true", "table": "pub_oper_log_config", "fields":"", "condition":""}
+				]
+			}    	
+	}
+    
+}
