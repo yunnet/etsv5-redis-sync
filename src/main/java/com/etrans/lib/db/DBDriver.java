@@ -88,51 +88,47 @@ public enum DBDriver {
 
     /**
      * 返回数据库连接URL
-     *
      * @param _host 主机
      * @param _port 端口
      * @param _name 库名
      * @return 连接URL
      */
     public String getConnectionURL(String _host, int _port, String _instance, String _name) {
-        String fmt;
+        String fmt = "";
         switch (this) {
-            case MYSQL:
+            case MYSQL:{
                 if (0 == _port)
                     _port = 3306;
                 fmt = "jdbc:mysql://@host:@port/@name?useUnicode=true&characterEncoding=GBK";
-                break;
+            } break;
                 
-            case MSSQL:
+            case MSSQL:{
                 if (0 == _port)
                     _port = 1433;
                 fmt = "jdbc:jtds:sqlserver://@host:@port;instance=@instance;DatabaseName=@name;charset=GBK";
-                break;
+            } break;
                 
-            case ORACLE:
+            case ORACLE:{
                 if (0 == _port)
                     _port = 1521;
                 fmt = "jdbc:oracle:thin:@host:@port:@name";
-                break;
+            } break;
                 
-            case SQLITE:
+            case SQLITE:{
                 fmt = "jdbc:sqlite:@name";
-                break;
+            } break;
                 
-            default:
-                fmt = "";
-                break;
+            default: break;
         }
         
         String port = "" + _port;
         if(null == _instance)
         	_instance = "";
         
-        String url = fmt.replace("@name", _name)
-        		        .replace("@port", port)
-        		        .replace("@instance", _instance)
-        		        .replace("@host", _host);
-        return url;
+        return fmt.replace("@name", _name)
+		          .replace("@port", port)
+		          .replace("@instance", _instance)
+		          .replace("@host", _host);
     }
 
 }

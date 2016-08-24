@@ -99,7 +99,7 @@ public class Application{
      *  @param cls 为Class类型
      *  @return 返回值为该类所在的Java程序运行的目录
      */
-    public static String getAppPath(Class cls) throws Exception{
+    public static String getAppPath(Class<?> cls) throws Exception{
         // 检查用户传入的参数是否为空
         if(null==cls)
             throw new IllegalArgumentException("argument is null");

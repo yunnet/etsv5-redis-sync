@@ -148,7 +148,7 @@ public class MemBuffer {
 		data[tail++]=_byte;
 	}
 
-	public void write(byte[] _bytes,int _offset, int _len){
+	public void write(byte[] _bytes, int _offset, int _len){
 		ensureCapacity(getSize() + _len);
 		int free_on_tail = capacity - tail;
 		
@@ -190,7 +190,7 @@ public class MemBuffer {
 		return res;
 	}
 
-	public String toString(String charset) throws Exception{
+	public String toString(final String charset) throws Exception{
 		return new String(data, head, tail-head, charset);
 	}
 
@@ -217,7 +217,7 @@ public class MemBuffer {
 		}
 	}
 
-    public void save(String _file) throws Exception{
+    public void save(final String _file) throws Exception{
         FileOutputStream fos = new FileOutputStream(_file, true);
         fos.write(data, head, tail-head);
         fos.flush();

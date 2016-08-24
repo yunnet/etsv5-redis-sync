@@ -1,12 +1,10 @@
 package com.etrans.etsv5.app.redis.sync;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.jolbox.bonecp.BoneCP;
-import com.jolbox.bonecp.BoneCPConfig;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 /** 
  * 工程名称: etsv5-redis-cacher  <br />
@@ -19,40 +17,40 @@ import com.jolbox.bonecp.BoneCPConfig;
  * 修改历史:   <br />
  */
 public class MySQLHelper {
-	private final static Logger logger = LoggerFactory.getLogger(MySQLHelper.class.getSimpleName());
-
-	private BoneCP connPool;
+	private HikariDataSource dataSource;
 	
 
 	/**
 	 * 构造函数
 	 * @param _dbconfig
 	 */
-	public MySQLHelper(Config _config) {
-		BoneCPConfig bonecfg = new BoneCPConfig();
-		bonecfg.setUsername(_config.getDbConfig().user);
-		bonecfg.setPassword(_config.getDbConfig().pass);
-		bonecfg.setJdbcUrl(_config.getDbConfig().getUrl());
+	public MySQLHelper(Config _config) {		
+		HikariConfig hkconfig = new HikariConfig();
+		hkconfig.setJdbcUrl(_config.getDbConfig().getUrl());
+		hkconfig.setUsername(_config.getDbConfig().user);
+		hkconfig.setPassword(_config.getDbConfig().pass);
+		hkconfig.addDataSourceProperty("cachePrepStmts", "true");
+		hkconfig.addDataSourceProperty("prepStmtCacheSize", "250");
+		hkconfig.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+		//池中最小空闲链接数量
+		hkconfig.setMinimumIdle(2);
+		//池中最大链接数量
+		hkconfig.setMaximumPoolSize(10);
 		
-		//数据库连接池的最小连接数
-		bonecfg.setMinConnectionsPerPartition(5);
-		//数据库连接池的最大连接数  
-		bonecfg.setMaxConnectionsPerPartition(10);
-		
-		try {
-			connPool = new BoneCP(bonecfg);
-		} catch (SQLException e) {
-			logger.error("new BoneCP err: ", e);
-		}
+		dataSource = new HikariDataSource(hkconfig);
 	}
-
-
+	
 	/**
-	 * 获取连接池
-	 * @return the connPool
+	 * 获取数据连接源
+	 * @return
+	 * @throws SQLException
 	 */
-	public BoneCP getConnPool() {
-		return connPool;
+	public Connection getConnection() throws SQLException{
+		Connection connection = null;
+		if(null != dataSource)
+			connection = dataSource.getConnection();
+			
+		return connection;
 	}
 	
 }

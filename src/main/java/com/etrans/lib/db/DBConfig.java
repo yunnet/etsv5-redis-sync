@@ -61,17 +61,20 @@ public class DBConfig {
         this.host = "localhost";
         this.databaseName = "test";
         switch (_driver){
-            case MYSQL:
+            case MYSQL:{
                 user = "root";
                 port = 3306;
-                break;
-            case MSSQL:
+            } break;
+            
+            case MSSQL:{
                 user = "sa";
                 port = 1433;
-                break;
-            case ORACLE:
+            } break;
+            
+            case ORACLE:{
                 port = 1521;
-                break;
+            } break;
+            
             default:
                 break;
         }

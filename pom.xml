@@ -9,7 +9,7 @@
 		<version>6.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>etsv5-redis-cacher</artifactId>
+	<artifactId>etsv5-redis-sync</artifactId>
 	<name>etsv5-redis-cacher</name>
 	<url>http://maven.apache.org</url>
 
@@ -21,7 +21,6 @@
 	    <dependency>
 		  <groupId>log4j</groupId>
 		  <artifactId>log4j</artifactId>
-		  <version>1.2.17</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -72,9 +71,10 @@
 
 		<!-- database pool -->
 		<dependency>
-			<groupId>com.jolbox</groupId>
-			<artifactId>bonecp</artifactId>
-		</dependency>
+	        <groupId>com.zaxxer</groupId>
+	        <artifactId>HikariCP</artifactId>
+	        <version>2.4.7</version>
+	    </dependency>
 
 		<!-- redis -->
 		<dependency>

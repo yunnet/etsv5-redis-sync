@@ -138,9 +138,9 @@ public class Facade {
 				
 				Connection connection = null;
 				try {
-					connection = mySQLHelper.getConnPool().getConnection();
+					connection = mySQLHelper.getConnection();
 					if(null == connection){
-						logger.error("bonecp get connection is null.");
+						logger.error("mySQLHelper get connection is null.");
 						return null;
 					}
 					
@@ -224,12 +224,12 @@ public class Facade {
 					isOK = false;
 				}
 				
-				ObjCacheResponse response = new ObjCacheResponse();
-				response.setReceiptID(_input.getTaskID());
-				response.setUserID(_input.getUserID());
-				response.setResult(isOK);
+				ObjCacheResponse obj = new ObjCacheResponse();
+				obj.setReceiptID(_input.getTaskID());
+				obj.setUserID(_input.getUserID());
+				obj.setResult(isOK);
 				
-				return response;
+				return obj;
 			}
 		};
 		pipeline.addAsThreadPoolBasedPipe(stageRedis, executorWrite);

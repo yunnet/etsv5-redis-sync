@@ -10,7 +10,8 @@ package com.etrans.etsv5.app.redis.sync;
  * 修改历史: <br />
  */
 public class RC_PipeException extends Exception {
-	
+	private static final long serialVersionUID = 3747405662368944569L;
+
 	/**
 	 * 抛出异常的Pipe实例。
 	 */
