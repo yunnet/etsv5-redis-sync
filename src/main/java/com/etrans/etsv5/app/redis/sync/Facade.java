@@ -66,7 +66,6 @@ public class Facade {
 	private static final int C_LOCALHOST = 99999;
 	
 	private final RC_SimplePipeline<RC_ITask, Object> pipeline;
-	
 
 	/**
 	 * 构造函数
@@ -120,7 +119,9 @@ public class Facade {
 		//schedule task
 		timer.scheduleWithFixedDelay(()->doTimer(), 
 				Math.abs(Utils.computNextMorningTimeMillis() - System.currentTimeMillis()), 
-				1000 * 60 * 60 * config.getTimeAtDay(), TimeUnit.MILLISECONDS);
+				1000 * 60 * 60 * config.getTimeAtDay(), 
+				TimeUnit.MILLISECONDS
+				);
 	}
 	
 	/**
@@ -145,7 +146,7 @@ public class Facade {
 					}
 					
 					Statement statement = connection.createStatement();
-					String sql_text = _input.genSQLText();
+					String sql_text = _input.getSqlText();
 					logger.info("SQL: {}", sql_text);
 					ResultSet rs = statement.executeQuery(sql_text);
 					
@@ -170,13 +171,13 @@ public class Facade {
 						}
 						
 						//rs.getint(1) = id
-						String key = _input.getTablename() + "_" + rs.getInt(1);
+						String key = _input.getPrefix() + "_" + rs.getInt(1);
 						resultMap.put(key, rsMap);
 						
 						rows++;
 					}
 					
-					logger.info("::: query {} finish. Affected rows: {}", _input.getTablename(), rows);
+					logger.info("::: query {} finish. Affected rows: {}", _input.getPrefix(), rows);
 					
 					RC_QueryResult obj = new RC_QueryResult();
 					obj.setTaskID(_input.getTaskID());
@@ -329,13 +330,41 @@ public class Facade {
 		RC_QueryTask task = new RC_QueryTask();
 		task.setTaskID(_data.getRequestID());
 		task.setUserID(_data.getUserID());
-		task.setTablename(_data.getTableName());
-		task.setFields(_data.getFields());
-		task.setCondition(_data.getCondition());
+		task.setPrefix(_data.getTableName());
+		String sql_Text = genSQLText(_data.getTableName(), _data.getFields(), _data.getCondition());
+		task.setSqlText(sql_Text);
 		
 		putTask(task);
 	}
 	
+	/**
+	 * 生成SQLText
+	 * @param _tablename 表名
+	 * @param _fields 字段名
+	 * @param _condition 条件
+	 * @return
+	 */
+	private String genSQLText(final String _tablename, final String _fields, final String _condition){
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT ");
+		
+		if(null != _fields && !_fields.isEmpty())
+			sb.append(_fields);
+		else
+			sb.append("*");
+		
+		sb.append(" FROM ").append(_tablename);
+		
+		if(null != _condition && !_condition.isEmpty())
+			sb.append(" WHERE ").append(_condition);
+		
+		return sb.toString();
+	}
+	
+	/**
+	 * 增加任务
+	 * @param _task
+	 */
 	private void putTask(RC_ITask _task){
 		try {
 			pipeline.process(_task);
@@ -368,9 +397,10 @@ public class Facade {
 			RC_QueryTask task = new RC_QueryTask();
 			task.setTaskID(C_LOCALHOST);
 			task.setUserID(C_LOCALHOST);
-			task.setTablename(table.getTablename());
-			task.setFields(table.getFields());
-			task.setCondition(table.getCondition());
+			task.setPrefix(table.getTableName());
+			
+			String sql_Text = genSQLText(table.getTableName(), table.getFields(), table.getCondition());
+			task.setSqlText(sql_Text);
 			
 			putTask(task);
 		}

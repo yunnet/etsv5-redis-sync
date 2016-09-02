@@ -17,27 +17,24 @@ public class RC_QueryTask implements RC_ITask{
 	private int taskID;
 	
 	/**
-	 * 请求用户
+	 * 请求用户ID
 	 */
 	private int userID; 
 	
 	/**
-	 * 表名
+	 * 查询语句
 	 */
-	private String tablename;
+	private String sqlText;
 	
 	/**
-	 * 字段名
+	 * 前缀名
 	 */
-	private String fields;
+	private String prefix;
+	
+	
 	
 	/**
-	 * 查询条件
-	 */
-	private String condition;
-	
-	/**
-	 * 获取
+	 * 获取任务ID
 	 * @return the taskID
 	 */
 	public int getTaskID() {
@@ -45,7 +42,7 @@ public class RC_QueryTask implements RC_ITask{
 	}
 
 	/**
-	 * 设置
+	 * 设置任务ID
 	 * @param taskID the taskID to set
 	 */
 	public void setTaskID(int taskID) {
@@ -53,7 +50,7 @@ public class RC_QueryTask implements RC_ITask{
 	}
 	
 	/**
-	 * 获取
+	 * 获取请求用户ID
 	 * @return the userID
 	 */
 	public int getUserID() {
@@ -61,7 +58,7 @@ public class RC_QueryTask implements RC_ITask{
 	}
 
 	/**
-	 * 设置
+	 * 设置请求用户ID
 	 * @param userID the userID to set
 	 */
 	public void setUserID(int userID) {
@@ -69,73 +66,35 @@ public class RC_QueryTask implements RC_ITask{
 	}
 
 	/**
-	 * 设置表名
-	 * @param tablename the tablename to set
+	 * 获取查询语句
+	 * @return the sqlText
 	 */
-	public void setTablename(String tablename) {
-		this.tablename = tablename;
+	public String getSqlText() {
+		return sqlText;
 	}
 
 	/**
-	 * 获取表名
-	 * @return the tablename
+	 * 设置查询语句
+	 * @param sqlText the sqlText to set
 	 */
-	public String getTablename() {
-		return tablename;
+	public void setSqlText(final String sqlText) {
+		this.sqlText = sqlText;
 	}
 
 	/**
-	 * 获取字段名
-	 * @return the fields
+	 * 获取前缀名
+	 * @return the prefix
 	 */
-	public String getFields() {
-		return fields;
+	public String getPrefix() {
+		return prefix;
 	}
 
 	/**
-	 * 设置字段名
-	 * @param fields the fields to set
+	 * 设置前缀名
+	 * @param prefix the prefix to set
 	 */
-	public void setFields(final String fields) {
-		this.fields = fields;
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
 	}
-
-	/**
-	 * 获取查询条件
-	 * @return the condition
-	 */
-	public String getCondition() {
-		return condition;
-	}
-
-	/**
-	 * 设置查询条件
-	 * @param condition the condition to set
-	 */
-	public void setCondition(final String condition) {
-		this.condition = condition;
-	}
-
-	/**
-	 * 生成SQLText
-	 * @return
-	 */
-	public String genSQLText(){
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT ");
-		
-		if(null != fields && !fields.isEmpty())
-			sb.append(fields);
-		else
-			sb.append("*");
-		
-		sb.append(" FROM ").append(tablename);
-		
-		if(null != condition && !condition.isEmpty())
-			sb.append(" WHERE ").append(condition);
-		
-		return sb.toString();
-	}
-
 	
 }

@@ -1,5 +1,4 @@
 package com.etrans.etsv5.app.redis.sync;
-
 /** 
  * 工程名称: etsv5-redis-cacher  <br />
  * 版权所有 (C) 2016 e-Trans Company  <br />
@@ -12,9 +11,14 @@ package com.etrans.etsv5.app.redis.sync;
  */
 public class Table {
 	/**
+	 * 别名
+	 */
+	private String alias;
+	
+	/**
 	 * 表名
 	 */
-	private String tablename;
+	private String tableName;
 	
 	/**
 	 * 字段名
@@ -28,18 +32,42 @@ public class Table {
 	
 	/**
 	 * 构造函数
-	 * @param _tablename 表名
+	 * @param _tableName 表名
 	 */
-	public Table(final String _tablename) {
-		this.tablename = _tablename;
+	public Table(final String _tableName) {
+		this.tableName = _tableName;
+	}
+	
+	/**
+	 * 获取别名是否为空
+	 * @return
+	 */
+	public boolean isnullAlias(){
+		return null == this.alias || this.alias.isEmpty();
+	}
+	
+	/**
+	 * 获取别名
+	 * @return the alias
+	 */
+	public String getAlias() {
+		return alias;
+	}
+
+	/**
+	 * 设置别名
+	 * @param alias the alias to set
+	 */
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 
 	/**
 	 * 获取
-	 * @return the tablename
+	 * @return the tableName
 	 */
-	public String getTablename() {
-		return tablename;
+	public String getTableName() {
+		return tableName;
 	}
 
 	/**
@@ -85,7 +113,7 @@ public class Table {
 			sb.append(fields);
 		else
 			sb.append("*");
-		sb.append(" FROM ").append(tablename);
+		sb.append(" FROM ").append(tableName);
 		
 		if(null != condition && !condition.isEmpty())
 			sb.append(" WHERE ").append(condition);

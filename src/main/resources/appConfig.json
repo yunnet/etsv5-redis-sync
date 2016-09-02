@@ -36,13 +36,24 @@
 			"threads": 1,
 			
 			"ddl":[
-				{"active": "true", "table": "pub_user", "fields":"ID,UserName,Name", "condition":""},
-				{"active": "true", "table": "pub_command", "fields":"", "condition":""},
-				{"active": "true", "table": "pub_driver", "fields":"", "condition":""},
-				{"active": "true", "table": "Pub_VehicleState", "fields":"", "condition":""},
-				{"active": "true", "table": "pub_workunit", "fields":"", "condition":""},
-				{"active": "true", "table": "pub_alarmkind", "fields":"", "condition":"source in(1,10)"},
-				{"active": "true", "table": "pub_oper_log_config", "fields":"", "condition":""}
+				{"active":"true", "alias":"", "table":"pub_user", "fields":"ID,UserName,Name", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"pub_command", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"pub_driver", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"Pub_VehicleState", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"pub_workunit", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"pub_alarmkind", "fields":"", "condition":"source in(1,10)", "sqlText":""},
+				{"active":"true", "alias":"", "table":"pub_oper_log_config", "fields":"", "condition":"", "sqlText":""},
+				
+				{"active":"true", "alias":"", "table":"etent.ent_alarmtblfieldcustomize", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_alarmtablefield", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_subscribelistsysdefault", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_SystemSetting", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_statewordcustomize", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_ContactPerson", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_subscribelistcustomize", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_ownersetting", "fields":"", "condition":"", "sqlText":""},
+				{"active":"true", "alias":"", "table":"etent.ent_monitordisplaysetting", "fields":"", "condition":"", "sqlText":""}
+				
 				]
 			}    	
 	}

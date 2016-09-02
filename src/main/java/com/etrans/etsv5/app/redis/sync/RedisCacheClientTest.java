@@ -8,11 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -109,6 +113,23 @@ public class RedisCacheClientTest extends JFrame {
 		setTitle("Redis cache client");
 		
 		setName("formMain");
+		
+		addWindowListener(new WindowAdapter(){
+			@Override
+			public void windowClosing(WindowEvent e) {
+				Object[] options = { "确定", "取消" };
+			    JOptionPane pane2 = new JOptionPane("确定要退出吗?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION, null, options, options[1]);
+			    JDialog dialog = pane2.createDialog("警告");
+			    dialog.setVisible(true);
+			    
+			    Object selectedValue = pane2.getValue();
+			    if (selectedValue == null || selectedValue == options[1]) {
+			    	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // 这个是关键
+			    } else if (selectedValue == options[0]) {
+			    	setDefaultCloseOperation(EXIT_ON_CLOSE);
+			    }
+			}
+		});
 		
 		//最大化
 //		setExtendedState(MAXIMIZED_BOTH);

@@ -101,7 +101,7 @@ public final class PathHelper {
      * 确保指定目录存在，没有则建立
      * @param _dir 目录
      */
-    public static void forceDir(String _dir){
+    public static void forceDir(final String _dir){
         File file = new File(_dir);
         if(!file.exists())
             file.mkdirs();
@@ -138,7 +138,6 @@ public final class PathHelper {
 
     /**
      * 读取文件为字节
-     *
      * @param _file
      * @return
      * @throws java.io.IOException
@@ -171,6 +170,11 @@ public final class PathHelper {
         }
     }
 
+    /**
+     * 样例
+     * @param _args
+     * @throws Exception
+     */
     public static void main(String[] _args) throws Exception {
         System.out.println(getClsRoot(PathHelper.class));
         System.out.println(PathHelper.getAppRoot());

@@ -146,12 +146,13 @@ public class Config extends AppConfig {
 		JSONArray array = mysql_json.getJSONArray("ddl");
 		for(int i = 0, n = array.size(); i < n; i++){
 			JSONObject js = (JSONObject) array.get(i);
+			String alias = js.getString("alias");
 			String table = js.getString("table");
 			String fields = js.getString("fields");
 			String condition = js.getString("condition");
 			
 			if(js.getBooleanValue("active")){
-				addTable(table, fields, condition);
+				addTable(alias, table, fields, condition);
 				logger.info(":::::: table:{} fields:[{}] condition:[{}]", table, fields, condition);
 			}else
 				logger.warn("skip table:{} fields:[{}] condition:[{}]", table, fields, condition);
@@ -160,13 +161,19 @@ public class Config extends AppConfig {
 	
 	/**
 	 * 增加查询表
+	 * @param _alias
 	 * @param _table
 	 * @param _fields
 	 * @param _condition
 	 */
-	private void addTable(final String _table, final String _fields, final String _condition){
+	private void addTable(final String _alias, 
+			              final String _table, 
+			              final String _fields, 
+			              final String _condition
+			              ){
 		if(!tableMap.containsKey(_table)){
 			Table table = new Table(_table);
+			table.setAlias(_alias);
 			table.setFields(_fields);
 			table.setCondition(_condition);
 			tableMap.put(_table, table);

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.etrans.etsv5.lib.redisSync;
 
 import com.etrans.etsv5.app.redis.sync.Utils;

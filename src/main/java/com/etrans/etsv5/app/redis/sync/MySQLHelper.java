@@ -17,12 +17,12 @@ import com.zaxxer.hikari.HikariDataSource;
  * 修改历史:   <br />
  */
 public class MySQLHelper {
-	private HikariDataSource dataSource;
+	private final HikariDataSource dataSource;
 	
 
 	/**
 	 * 构造函数
-	 * @param _dbconfig
+	 * @param _config
 	 */
 	public MySQLHelper(Config _config) {		
 		HikariConfig hkconfig = new HikariConfig();

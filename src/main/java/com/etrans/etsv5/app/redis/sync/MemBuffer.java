@@ -15,8 +15,8 @@ import java.io.FileOutputStream;
  * 修改历史: <br />
  */
 public class MemBuffer {
-	static private final int C_SIZE = 1024 * 8;
-	static private final int C_INCS = 1024;
+	private static final int C_SIZE = 1024 * 8;
+	private static final int C_INCS = 1024;
 
 	private int head;
 	private int tail;
@@ -24,6 +24,13 @@ public class MemBuffer {
 	private int increment;
 	private byte[] data;
 
+	/**
+	 * 构造函数
+	 */
+	public MemBuffer(){
+		this(C_SIZE);
+	}
+	
 	public MemBuffer(int _capacity){
 		if(0 == _capacity)
 			_capacity = C_SIZE;
@@ -39,10 +46,6 @@ public class MemBuffer {
 		increment = C_INCS;
 		head = 0;
 		data = _data;
-	}
-
-	public MemBuffer(){
-		this(C_SIZE);
 	}
 
 	private void ensureCapacity(int _new_size){
@@ -179,25 +182,6 @@ public class MemBuffer {
 		return res;
 	}
 
-	@Override
-	public String toString(){
-		String res = null;
-		try{
-			res = new String(data, head, tail-head);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-		return res;
-	}
-
-	public String toString(final String charset) throws Exception{
-		return new String(data, head, tail-head, charset);
-	}
-
-    public String toHex(){
-        return Utils.byteArrayToHex(data, head, tail - head);
-    }
-
 	public void load(File _file) throws Exception{
 		byte[] buf = new byte[8192];
 		FileInputStream fis = new FileInputStream(_file);
@@ -222,5 +206,24 @@ public class MemBuffer {
         fos.write(data, head, tail-head);
         fos.flush();
         fos.close();
+    }
+    
+    @Override
+	public String toString(){
+		String res = null;
+		try{
+			res = new String(data, head, tail-head);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return res;
+	}
+    
+    public String toString(final String charset) throws Exception{
+		return new String(data, head, tail-head, charset);
+	}
+
+    public String toHex(){
+        return Utils.byteArrayToHex(data, head, tail - head);
     }
 }
