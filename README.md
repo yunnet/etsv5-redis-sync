@@ -15,6 +15,9 @@
 | fields        | String       | 字段名   |
 | condition     | String       | 查询条件 |
 
+* 界面
+![界面](https://github.com/yunnet/etsv5-redis-sync/blob/master/src/main/resources/client_pic.png "客户端")  
+
 
 #####  服务端
 * 回复结构(ObjCacheResponse)
