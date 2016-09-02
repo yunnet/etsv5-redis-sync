@@ -16,7 +16,7 @@
 | condition     | String       | 查询条件 |
 
 * 界面
-![界面](https://github.com/yunnet/etsv5-redis-sync/blob/master/src/main/resources/client_pic.png "客户端")  
+![客户端](https://github.com/yunnet/etsv5-redis-sync/blob/master/src/main/resources/client_pic.png "客户端")  
 
 
 #####  服务端
@@ -29,3 +29,6 @@
 | receiptID     | int          | 回复ID   |
 | userID        | int          | 用户编号 |
 | result        | boolean      | 返回结果是否同步成功     |
+
+* 界面
+* ![服务端](https://github.com/yunnet/etsv5-redis-sync/blob/master/src/main/resources/server_pic.png "服务端")  
